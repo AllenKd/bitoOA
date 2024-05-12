@@ -22,7 +22,7 @@ func Test_service_InsertUser(t *testing.T) {
 		Gender:              common.Boy,
 		NumberOfWantedDates: 10,
 		Liked:               map[string]bool{},
-		BeingLicked:         map[string]bool{},
+		BeingLiked:          map[string]bool{},
 		Matched:             map[string]bool{},
 	}
 	s.InsertUser(ctx, &tu)
@@ -41,7 +41,7 @@ func Test_service_GetUsers(t *testing.T) {
 		Gender:              common.Boy,
 		NumberOfWantedDates: 10,
 		Liked:               map[string]bool{},
-		BeingLicked:         map[string]bool{},
+		BeingLiked:          map[string]bool{},
 		Matched:             map[string]bool{},
 	}
 	s.InsertUser(ctx, &tu)
@@ -84,7 +84,7 @@ func Test_service_GetUser(t *testing.T) {
 		Gender:              common.Boy,
 		NumberOfWantedDates: 10,
 		Liked:               map[string]bool{},
-		BeingLicked:         map[string]bool{},
+		BeingLiked:          map[string]bool{},
 		Matched:             map[string]bool{},
 	}
 	uId := s.InsertUser(ctx, &tu)
@@ -111,7 +111,7 @@ func Test_service_RemoveUser(t *testing.T) {
 		Gender:              common.Boy,
 		NumberOfWantedDates: 10,
 		Liked:               map[string]bool{},
-		BeingLicked:         map[string]bool{},
+		BeingLiked:          map[string]bool{},
 		Matched:             map[string]bool{},
 	}
 	uId := s.InsertUser(ctx, &tu)
@@ -131,7 +131,7 @@ func Test_service_GetPopularUsers(t *testing.T) {
 		Gender:              common.Boy,
 		NumberOfWantedDates: 10,
 		Liked:               map[string]bool{},
-		BeingLicked: map[string]bool{
+		BeingLiked: map[string]bool{
 			"uId001": true,
 			"uId002": true,
 			"uId003": true,
@@ -147,7 +147,7 @@ func Test_service_GetPopularUsers(t *testing.T) {
 		Gender:              common.Girl,
 		NumberOfWantedDates: 10,
 		Liked:               map[string]bool{},
-		BeingLicked: map[string]bool{
+		BeingLiked: map[string]bool{
 			"uId001": true,
 			"uId002": true,
 			"uId003": true,
@@ -164,7 +164,7 @@ func Test_service_GetPopularUsers(t *testing.T) {
 		Gender:              common.Girl,
 		NumberOfWantedDates: 10,
 		Liked:               map[string]bool{},
-		BeingLicked: map[string]bool{
+		BeingLiked: map[string]bool{
 			"uId001": true,
 			"uId002": true,
 			"uId003": true,

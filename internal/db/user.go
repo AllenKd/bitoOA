@@ -14,10 +14,10 @@ type User struct {
 	Gender              common.Gender `json:"gender" example:"1"` // 0 for female, 1 for male
 	NumberOfWantedDates uint          `json:"numberOfWantedDates" example:"10"`
 
-	Blocked     bool            `json:"-"`
-	Liked       map[string]bool `json:"-"`
-	BeingLicked map[string]bool `json:"-"`
-	Matched     map[string]bool `json:"-"`
+	Blocked    bool            `json:"-"`
+	Liked      map[string]bool `json:"-"`
+	BeingLiked map[string]bool `json:"-"`
+	Matched    map[string]bool `json:"-"`
 }
 
 func (c *service) InsertUser(ctx context.Context, user *User) string {
@@ -79,7 +79,7 @@ func (c *service) GetPopularUsers(ctx context.Context, limit int) []*User {
 	}
 
 	sort.Slice(users[:], func(i, j int) bool {
-		return len(users[i].BeingLicked) > len(users[j].BeingLicked)
+		return len(users[i].BeingLiked) > len(users[j].BeingLiked)
 	})
 
 	if len(users) <= limit {

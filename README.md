@@ -23,6 +23,23 @@ Once server start, visit http://localhost:8080/swagger/index.html#/
   <img src="resource/apiDocumentation.png">
 </p>
 
+## System design
+
+- DI: wire
+- Framework: gin
+- Logger: zap
+- Architecture: controller -> service (interface and implementation) -> repo (interface and implementation)
+- Definition of popular user: how much the user being liked
+
+## API time complexity
+
+- POST /api/v1/user: O(n)
+  - O(1) for insert, O(n) for find candidates.
+- DELETE /api/v1/users/{userId}: O(1)
+- GET /api/v1/matches/popular-users: O(nlogn)
+  - Sort users by popularity: O(nlogn)
+- POST /api/v1/matched/like: O(1)
+
 ## TBD
 
 - Remove User

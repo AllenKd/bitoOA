@@ -29,9 +29,9 @@ func (s *service) CreateUser(ctx context.Context, name string, height uint, gend
 		Gender:              gender,
 		NumberOfWantedDates: dates,
 
-		Liked:       map[string]bool{},
-		Matched:     map[string]bool{},
-		BeingLicked: map[string]bool{},
+		Liked:      map[string]bool{},
+		Matched:    map[string]bool{},
+		BeingLiked: map[string]bool{},
 	}
 	userId := s.db.InsertUser(ctx, &user)
 	log.With("userId", userId).Info("user created")
@@ -90,7 +90,7 @@ func (s *service) DoLike(ctx context.Context, fromUserId string, toUserId string
 	}
 
 	fu.Liked[toUserId] = true
-	tu.BeingLicked[fromUserId] = true
+	tu.BeingLiked[fromUserId] = true
 
 	// no match
 	if _, ok := tu.Liked[fromUserId]; !ok {

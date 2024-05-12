@@ -18,15 +18,6 @@ definitions:
         example: 10
         type: integer
     type: object
-  handler.hello:
-    properties:
-      message:
-        example: Hello
-        type: string
-      timestamp:
-        example: "2021-07-24T20:01:25.874565+08:00"
-        type: string
-    type: object
   types.HttpCreateUserReq:
     properties:
       gender:
@@ -154,18 +145,6 @@ info:
   title: Backend API
   version: "1.0"
 paths:
-  /:
-    get:
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handler.hello'
-      summary: Hello Page
-      tags:
-      - Hello
   /api/v1/matches/like:
     post:
       consumes:
@@ -191,7 +170,7 @@ paths:
       summary: Send a like from a user to another.
       tags:
       - V1
-      - Match
+      - Matches
   /api/v1/matches/popular-users:
     get:
       parameters:

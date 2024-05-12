@@ -19,25 +19,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/": {
-            "get": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Hello"
-                ],
-                "summary": "Hello Page",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handler.hello"
-                        }
-                    }
-                }
-            }
-        },
         "/api/v1/matches/like": {
             "post": {
                 "consumes": [
@@ -48,7 +29,7 @@ const docTemplate = `{
                 ],
                 "tags": [
                     "V1",
-                    "Match"
+                    "Matches"
                 ],
                 "summary": "Send a like from a user to another.",
                 "parameters": [
@@ -212,19 +193,6 @@ const docTemplate = `{
                 "numberOfWantedDates": {
                     "type": "integer",
                     "example": 10
-                }
-            }
-        },
-        "handler.hello": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "type": "string",
-                    "example": "Hello"
-                },
-                "timestamp": {
-                    "type": "string",
-                    "example": "2021-07-24T20:01:25.874565+08:00"
                 }
             }
         },

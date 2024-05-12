@@ -139,7 +139,7 @@ func (u *UserController) RemoveSinglePerson(c *gin.Context) {
 
 // Like
 // @Summary Send a like from a user to another.
-// @Tags V1,Match
+// @Tags V1,Matches
 // @version 1.0
 // @Param request body types.HttpLikeReq true "Log"
 // @Accept  json
