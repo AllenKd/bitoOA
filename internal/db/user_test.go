@@ -8,13 +8,12 @@ import (
 	"testing"
 )
 
-var s = service{
-	table: map[string]*User{},
-	log:   logger.New(&config.Config{}),
-}
-
 func Test_service_InsertUser(t *testing.T) {
 	ctx := context.Background()
+	s := service{
+		table: map[string]*User{},
+		log:   logger.New(&config.Config{}),
+	}
 
 	tu := User{
 		Name:                "Bob",
@@ -34,6 +33,10 @@ func Test_service_InsertUser(t *testing.T) {
 
 func Test_service_GetUsers(t *testing.T) {
 	ctx := context.Background()
+	s := service{
+		table: map[string]*User{},
+		log:   logger.New(&config.Config{}),
+	}
 
 	tu := User{
 		Name:                "Bob",
@@ -77,6 +80,10 @@ func Test_service_GetUsers(t *testing.T) {
 
 func Test_service_GetUser(t *testing.T) {
 	ctx := context.Background()
+	s := service{
+		table: map[string]*User{},
+		log:   logger.New(&config.Config{}),
+	}
 
 	tu := User{
 		Name:                "Bob",
@@ -104,6 +111,10 @@ func Test_service_GetUser(t *testing.T) {
 
 func Test_service_RemoveUser(t *testing.T) {
 	ctx := context.Background()
+	s := service{
+		table: map[string]*User{},
+		log:   logger.New(&config.Config{}),
+	}
 
 	tu := User{
 		Name:                "Bob",
@@ -124,6 +135,10 @@ func Test_service_RemoveUser(t *testing.T) {
 
 func Test_service_GetPopularUsers(t *testing.T) {
 	ctx := context.Background()
+	s := service{
+		table: map[string]*User{},
+		log:   logger.New(&config.Config{}),
+	}
 
 	tu1 := User{
 		Name:                "Bob",

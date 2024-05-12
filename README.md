@@ -40,6 +40,12 @@ Once server start, visit http://localhost:8080/swagger/index.html#/
   - Sort users by popularity: O(nlogn)
 - POST /api/v1/matched/like: O(1)
 
+## Test
+
+```shell
+$ make test
+```
+
 ## TBD
 
 - Remove User

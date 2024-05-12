@@ -1,5 +1,8 @@
 
-.PHONY: build swagger all
+.PHONY: build swagger all test
+
+test:
+	go test ./...
 
 build:
 	wire gen ./cmd; go build -o ./bin/backend ./cmd
