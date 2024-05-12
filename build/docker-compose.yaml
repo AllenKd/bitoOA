@@ -1,0 +1,14 @@
+version: '3'
+services:
+  bito-oa:
+    build:
+      context: ../
+      dockerfile: ./build/Dockerfile
+#    image: allensyk/template7-backend:arm64
+    container_name: bitoOAByAllenKao
+    ports:
+      - "8080:8080"
+    volumes:
+      - type: bind
+        source: ../config/config.yaml
+        target: /backend/config/config.yaml

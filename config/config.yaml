@@ -1,0 +1,7 @@
+log:
+  level: debug # one of debug, info, warn, error
+
+service:
+  port: 8080
+
+env: local

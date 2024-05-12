@@ -1,0 +1,269 @@
+definitions:
+  db.User:
+    properties:
+      gender:
+        description: 0 for female, 1 for male
+        example: 1
+        type: integer
+      height:
+        example: 180
+        type: integer
+      id:
+        example: c30790bf-75e0-4cd3-9ec2-c25662f77e33
+        type: string
+      name:
+        example: Bob
+        type: string
+      numberOfWantedDates:
+        example: 10
+        type: integer
+    type: object
+  handler.hello:
+    properties:
+      message:
+        example: Hello
+        type: string
+      timestamp:
+        example: "2021-07-24T20:01:25.874565+08:00"
+        type: string
+    type: object
+  types.HttpCreateUserReq:
+    properties:
+      gender:
+        description: 0 for female, 1 for male
+        example: 1
+        type: integer
+      height:
+        example: 180
+        type: integer
+      matchesLimit:
+        description: optional, default=10
+        example: 10
+        type: integer
+      name:
+        example: Bob
+        type: string
+      numberOfWantedDates:
+        example: 10
+        type: integer
+    type: object
+  types.HttpCreateUserResp:
+    properties:
+      code:
+        example: 3000
+        type: integer
+      data:
+        $ref: '#/definitions/types.HttpCreateUserRespData'
+      message:
+        example: ok
+        type: string
+      requestId:
+        example: b8974256-1f17-477f-8638-c7ebbac656d7
+        type: string
+    type: object
+  types.HttpCreateUserRespData:
+    properties:
+      candidates:
+        items:
+          $ref: '#/definitions/db.User'
+        type: array
+      userId:
+        example: 30e897aa-2161-481b-9f61-e0700f467bba
+        type: string
+    type: object
+  types.HttpGetPopularUserRespData:
+    properties:
+      popularUsers:
+        items:
+          $ref: '#/definitions/db.User'
+        type: array
+    type: object
+  types.HttpGetPopularUsersResp:
+    properties:
+      code:
+        example: 3000
+        type: integer
+      data:
+        $ref: '#/definitions/types.HttpGetPopularUserRespData'
+      message:
+        example: ok
+        type: string
+      requestId:
+        example: b8974256-1f17-477f-8638-c7ebbac656d7
+        type: string
+    type: object
+  types.HttpLikeReq:
+    properties:
+      fromUserId:
+        example: 30e897aa-2161-481b-9f61-e0700f467bba
+        type: string
+      toUserId:
+        example: c30790bf-75e0-4cd3-9ec2-c25662f77e33
+        type: string
+    type: object
+  types.HttpLikeResp:
+    properties:
+      code:
+        example: 3000
+        type: integer
+      data:
+        $ref: '#/definitions/types.HttpLikeRespData'
+      message:
+        example: ok
+        type: string
+      requestId:
+        example: b8974256-1f17-477f-8638-c7ebbac656d7
+        type: string
+    type: object
+  types.HttpLikeRespData:
+    properties:
+      matched:
+        description: true if users like each other
+        type: boolean
+    type: object
+  types.HttpRespBase:
+    properties:
+      code:
+        example: 3000
+        type: integer
+      message:
+        example: ok
+        type: string
+      requestId:
+        example: b8974256-1f17-477f-8638-c7ebbac656d7
+        type: string
+    type: object
+  types.HttpRespError:
+    properties:
+      code:
+        example: 1024
+        type: integer
+      message:
+        example: token unauthorized
+        type: string
+      requestId:
+        example: 27c0a70e-59ab-4a94-872c-5f014aaa047f
+        type: string
+    type: object
+info:
+  contact: {}
+  description: API Documentation
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Backend API
+  version: "1.0"
+paths:
+  /:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.hello'
+      summary: Hello Page
+      tags:
+      - Hello
+  /api/v1/matches/like:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Log
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.HttpLikeReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response
+          schema:
+            $ref: '#/definitions/types.HttpLikeResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/types.HttpRespError'
+      summary: Send a like from a user to another.
+      tags:
+      - V1
+      - Match
+  /api/v1/matches/popular-users:
+    get:
+      parameters:
+      - description: limit, default=10
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response
+          schema:
+            $ref: '#/definitions/types.HttpGetPopularUsersResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/types.HttpRespError'
+      summary: Find the most N possible matched single people, where N is a request
+        parameter
+      tags:
+      - V1
+      - Matches
+  /api/v1/user:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Log
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/types.HttpCreateUserReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response
+          schema:
+            $ref: '#/definitions/types.HttpCreateUserResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/types.HttpRespError'
+      summary: Add a new user to the matching system and find any possible matches
+        for the new user.
+      tags:
+      - V1
+      - User
+  /api/v1/users/{userId}:
+    delete:
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response
+          schema:
+            $ref: '#/definitions/types.HttpRespBase'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/types.HttpRespError'
+      summary: Remove a user from the matching system so that the user cannot be matched
+        anymore.
+      tags:
+      - V1
+      - User
+swagger: "2.0"
